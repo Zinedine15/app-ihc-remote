@@ -1,3 +1,7 @@
+let miVentana = null;
+let miVentana2 = null;
+let ultimoComando = ''; // Variable para almacenar el último comando detectado
+
 document.addEventListener('DOMContentLoaded', function () {
     const OrdenText = document.getElementById('orden');
 
@@ -17,7 +21,37 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log('Último registro en MockAPI:', ultimoRegistro);
                 
                 // Mostrar la última orden en la página
-                OrdenText.textContent = ultimoRegistro.textoComando; // Cambiamos a "comando" en lugar de "orden"
+                OrdenText.textContent = ultimoRegistro.textoComando.toUpperCase();
+
+                // Ejecutar una de las opciones según el comando detectado, si es diferente al último comando detectado
+                if (ultimoRegistro.textoComando !== ultimoComando) {
+                    const kw1 = 'pestaña nueva';
+                    const kw2 = 'la cuerda';
+                    const kw3 = 'tamaño pequeño';
+                    const kw4 = 'cierra pestaña';
+                    const kw5 = 'cierra navegador';
+
+                    if (ultimoRegistro.textoComando.includes(kw1)) {
+                        window.alert("Abriendo Pestaña Nueva");
+                        miVentana = window.open('https://www.google.com', '_blank');
+                    } else if (ultimoRegistro.textoComando.includes(kw2)) {
+                        window.alert("Abriendo Página de 'LaCuerda'");
+                        miVentana2 = window.open('https://acordes.lacuerda.net', '_blank');
+                    } else if (ultimoRegistro.textoComando.includes(kw3)) {
+                        const opciones = 'width=600,height=400,left=100,top=100';
+                        window.alert("Abriendo Ventana Pequeña");
+                        window.open('https://www.google.com', '_blank', opciones);
+                    } else if (ultimoRegistro.textoComando.includes(kw4)) {
+                        window.alert("Puedes cerrar la pestaña de la cuerdax");
+                    } else if (ultimoRegistro.textoComando.includes(kw5)) {
+                        window.alert("Puedes cerrar el navegador");
+                    } else {
+                        console.log("No se detectó el comando");
+                    }
+
+                    // Actualizar el último comando detectado
+                    ultimoComando = ultimoRegistro.textoComando;
+                }
             }
         })
         .catch(error => console.error('Error al obtener registros del MockAPI:', error));
@@ -26,10 +60,3 @@ document.addEventListener('DOMContentLoaded', function () {
     // Llamar a la función leerComandoDeMockAPI cada 2 segundos
     setInterval(leerComandoDeMockAPI, 2000);
 });
-
-
-
-
-
-
-
