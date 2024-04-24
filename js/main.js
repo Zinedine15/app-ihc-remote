@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const kw3 = 'tamaño pequeño';
                     const kw4 = 'Abre YouTube';
                     const kw5 = 'cierra navegador';
+                    const kw6 = 'página del tec';
 
                     if (ultimoRegistro.textoComando.includes(kw1)) {
                         window.alert("Abriendo Pestaña Nueva");
@@ -55,7 +56,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         abrirYouTube('dQw4w9WgXcQ&ab');
                     } else if (ultimoRegistro.textoComando.includes(kw5)) {
                         window.alert("Puedes cerrar el navegador");
-                    } else {
+                    } else if (ultimoRegistro.textoComando.includes(kw6)) {
+                        window.alert("Abriendo Página del ITP");
+                        miVentana = window.open('https://itp.itpachuca.edu.mx', '_blank');
+                    }else {
                         console.log("No se detectó el comando");
                     }
 
