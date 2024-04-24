@@ -65,7 +65,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     
                     function abrirYouTube(videoId) {
                         var url = 'https://www.youtube.com/watch?v=' + videoId;
-                        window.location.href = url;
+                        var intentUrl = 'vnd.youtube://' + videoId;
+                        
+                        // Intentar abrir la aplicación de YouTube utilizando el enlace profundo
+                        window.location.href = intentUrl;
+                      
+                        // Si la apertura de la aplicación falla, abrir el enlace web de YouTube
+                        setTimeout(function() {
+                          window.location.href = url;
+                        }, 1000);
                       }
                       
                 }
