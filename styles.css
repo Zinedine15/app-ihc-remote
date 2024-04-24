@@ -1,20 +1,30 @@
+body {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url('fondo.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+}
+
 #title{
-    color: #5689c0;
+    color: #2e424d;
     font-weight: bold;
+    text-align: center;
 }
 #title2{
-    color: #244d61;
+    color: #2e424d;
     font-weight: bold;
 }
 
 #orden{
-    color: crimson;
+    color: #0295a9;
     font-size: 25px;
     text-align: center;
 }
 
 #text{
-    color: green;
+    color: #5b8291;
     font-weight: bold;
     font-size: 20px;
     

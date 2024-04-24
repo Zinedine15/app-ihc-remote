@@ -1,8 +1,10 @@
 let miVentana = null;
 let miVentana2 = null;
 let ultimoComando = ''; // Variable para almacenar el último comando detectado
+let ultimaHora = ''; // Variable para almacenar la última hora detectada
+let primeraCarga = true; // Variable para controlar la primera carga
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () { 
     const OrdenText = document.getElementById('orden');
 
     function leerComandoDeMockAPI() {
@@ -20,15 +22,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 const ultimoRegistro = data[data.length - 1];
                 console.log('Último registro en MockAPI:', ultimoRegistro);
                 
-                // Mostrar la última orden en la página
-                OrdenText.textContent = ultimoRegistro.textoComando.toUpperCase();
+                // Si es la primera carga, actualizar el último comando y hora detectados sin mostrarlo en la página
+                if (primeraCarga) {
+                    ultimoComando = ultimoRegistro.textoComando;
+                    ultimaHora = ultimoRegistro.hora;
+                    primeraCarga = false;
+                    return;
+                }
 
-                // Ejecutar una de las opciones según el comando detectado, si es diferente al último comando detectado
-                if (ultimoRegistro.textoComando !== ultimoComando) {
+                // Mostrar la última orden en la página solo si hay un cambio en el comando o la hora
+                if (ultimoRegistro.textoComando !== ultimoComando || ultimoRegistro.hora !== ultimaHora) {
+                    OrdenText.textContent = ultimoRegistro.textoComando.toUpperCase();
+
                     const kw1 = 'pestaña nueva';
                     const kw2 = 'la cuerda';
                     const kw3 = 'tamaño pequeño';
-                    const kw4 = 'cierra pestaña';
+                    const kw4 = 'Abre YouTube';
                     const kw5 = 'cierra navegador';
 
                     if (ultimoRegistro.textoComando.includes(kw1)) {
@@ -42,15 +51,23 @@ document.addEventListener('DOMContentLoaded', function () {
                         window.alert("Abriendo Ventana Pequeña");
                         window.open('https://www.google.com', '_blank', opciones);
                     } else if (ultimoRegistro.textoComando.includes(kw4)) {
-                        window.alert("Puedes cerrar la pestaña de la cuerdax");
+                        window.alert("Abriendo YouTube");
+                        abrirYouTube('dQw4w9WgXcQ&ab');
                     } else if (ultimoRegistro.textoComando.includes(kw5)) {
                         window.alert("Puedes cerrar el navegador");
                     } else {
                         console.log("No se detectó el comando");
                     }
 
-                    // Actualizar el último comando detectado
+                    // Actualizar el último comando y hora detectados
                     ultimoComando = ultimoRegistro.textoComando;
+                    ultimaHora = ultimoRegistro.hora;
+                    
+                    function abrirYouTube(videoId) {
+                        var url = 'https://www.youtube.com/watch?v=' + videoId;
+                        window.location.href = url;
+                      }
+                      
                 }
             }
         })
