@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         window.open('https://www.google.com', '_blank', opciones);
                     } else if (ultimoRegistro.textoComando.includes(kw4)) {
                         window.alert("Abriendo YouTube");
-                        abrirYouTube('dQw4w9WgXcQ&ab');
+                        abrirYouTube('Gs069dndIYk&ab');
                     } else if (ultimoRegistro.textoComando.includes(kw5)) {
                         window.alert("Puedes cerrar el navegador");
                     } else if (ultimoRegistro.textoComando.includes(kw6)) {
